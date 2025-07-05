@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_menu')->unique();
-            $table->text('deskripsi')->nullable();
-            $table->decimal('harga', 10, 2);
-            $table->string('gambar')->nullable();
-            $table->string('kategori')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->decimal('price_per_pax', 10, 2);
+            $table->integer('min_order');
+            $table->string('image_url')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu');
+        Schema::dropIfExists('packages');
     }
 };

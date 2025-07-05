@@ -20,6 +20,7 @@ class MenuSeeder extends Seeder
                 'harga' => rand(10000, 50000),
                 'gambar' => 'menu' . $i . '.jpg',
                 'kategori' => 'Kategori ' . rand(1, 5),
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

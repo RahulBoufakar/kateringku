@@ -6,7 +6,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
             <h1>Menu</h1>
-            <a href="{{ route('menu.create') }}" class="btn btn-primary">Tambah Menu</a>
+            <a href="{{ route('admin.menus.create') }}" class="btn btn-primary">Tambah Menu</a>
         </div>
         <p>Welcome to the admin menu management page!</p>
         <p>Here you can manage your application menus, add new items, and organize them as needed.</p>
@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($menu as $data)
+                    @forelse($menus as $data)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_menu }}</td>
@@ -40,8 +40,8 @@
                             </td>
                             <td>{{ $data->kategori }}</td>
                             <td>
-                                <a href="{{ route('menu.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="{{ route('menu.destroy', $data->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus menu ini?')">
+                                <a href="{{ route('admin.menus.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('admin.menus.destroy', $data->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus menu ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
