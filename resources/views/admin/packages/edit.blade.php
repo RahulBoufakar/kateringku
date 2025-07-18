@@ -37,13 +37,13 @@
             </div>
             
             <div class="mb-3">
-                <label for="image" class="form-label">Upload Gambar Baru (Opsional)</label>
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
-                @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                <label for="image_url" class="form-label">Upload Gambar Baru (Opsional)</label>
+                <input class="form-control @error('image_url') is-invalid @enderror" type="file" id="image_url" name="image_url">
+                @error('image_url') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 @if ($package->image_url)
                     <div class="mt-2">
                         <small>Gambar saat ini:</small><br>
-                        <img src="{{ asset('storage/' . $package->image_url) }}" alt="{{ $package->name }}" style="max-width: 200px;">
+                        <img src="{{ asset('storage/' . $package->image_url) }}" alt="{{ $package->getOriginal('name') }}" style="max-width: 200px;">
                     </div>
                 @endif
             </div>

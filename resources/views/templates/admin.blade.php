@@ -1,5 +1,3 @@
-
-{{-- resources/views/layouts/admin.blade.php --}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -80,6 +78,15 @@
                                 <p>Manajemen Pesanan</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link text-start w-100" style="color: #fff; text-decoration: none;">
+                                    <i class="nav-icon bi bi-box-arrow-right" style="color: #fff;"></i>
+                                    <p class="mb-0" style="color: #fff;">Logout</p>
+                                </button>
+                            </form>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -112,5 +119,6 @@
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"></script>
     {{-- PASTIKAN PATH INI BENAR SESUAI PROYEK ANDA --}}
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

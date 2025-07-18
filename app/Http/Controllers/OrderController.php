@@ -13,8 +13,8 @@ class OrderController extends Controller
     // Untuk menampilkan riwayat pesanan user
     public function index()
     {
-        $orders = Auth::user()->orders->latest()->get();
-        return view('user.orders.index', compact('orders'));
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+        return view('orders.index', compact('orders'));
     }
     
     // Untuk menampilkan detail pesanan

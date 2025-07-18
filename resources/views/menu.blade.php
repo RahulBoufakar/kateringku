@@ -3,9 +3,11 @@
 @section('title-page', 'Pilih Menu Anda')
 
 @section('header')
-    @include('partials.navbar')
-    <h1 class="display-4 fw-bold">Pilih Menu Spesial Anda</h1>
-    <p class="lead">Pesan paket praktis atau pilih sendiri menu favorit Anda.</p>
+    <div class="text-center px-3">
+        <h1 class="display-4 fw-bold mb-3">Pilih Menu Spesial Anda</h1>
+        <p class="lead">Pesan paket praktis atau pilih sendiri menu favorit Anda.</p>
+    </div>
+
 @endsection
 
 @section('content')
@@ -111,7 +113,7 @@
                             @foreach ($items as $item)
                                 <div class="col">
                                     <div class="card h-100">
-                                        <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://via.placeholder.com/300x200' }}" class="card-img-top" alt="{{ $item->nama_menu }}">
+                                        <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://via.placeholder.com/300x200' }}" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;" alt="{{ $item->nama_menu }}">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $item->nama_menu }}</h5>
                                             <p class="card-text">Rp {{ number_format($item->harga, 0, ',', '.') }}/porsi</p>

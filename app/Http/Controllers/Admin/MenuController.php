@@ -74,29 +74,31 @@ class MenuController extends Controller
     public function update(Request $request, menu $menu)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'nama_menu' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'kategori' => 'required|string',
+            'harga' => 'required|numeric',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $imagePath = $menu->image_url; // Gunakan gambar lama sebagai default
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('gambar')) {
             // Jika ada gambar lama, hapus
-            if ($menu->image_url) {
-                Storage::disk('public')->delete($menu->image_url);
+            if ($menu->gambar) {
+            Storage::disk('public')->delete($menu->gambar);
             }
             // Upload gambar baru
-            $imagePath = $request->file('image')->store('menu_images', 'public');
+            $imagePath = $request->file('gambar')->store('menu_images', 'public');
+        } else {
+            // Tidak ada gambar baru, gunakan gambar lama
+            $imagePath = $menu->gambar;
         }
-
         $menu->update([
-            'nama_menu' => $request->name,
-            'deskripsi' => $request->description,
-            'kategori' => $request->category,
-            'harga' => $request->price,
+            'nama_menu' => $request->nama_menu,
+            'deskripsi' => $request->deskripsi,
+            'kategori' => $request->kategori,
+            'harga' => $request->harga,
             'gambar' => $imagePath,
         ]);
 

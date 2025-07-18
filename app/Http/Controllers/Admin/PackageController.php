@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Package;
+use Storage;
 use App\Models\menu;
+use App\Models\Package;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage as StorageDisk;
+use Illuminate\Support\Facades\Storage as StoragePackage;
 
 class PackageController extends Controller
 {
@@ -30,18 +33,62 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price_per_pax' => 'required|numeric',
-            'min_order' => 'required|integer',
-            'menu_items' => 'required|array' // Pastikan menu_items dikirim sebagai array
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Gambar bersifat opsional
         ]);
 
-        $package = Package::create($request->except('menu_items'));
-        
-        // Lampirkan menu item ke paket
-        $package->menuItems()->attach($request->menu_items);
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            // Simpan gambar ke storage/app/public/package_images
+            $imagePath = $request->file('image')->store('package_images', 'public');
+        }
+
+        Package::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category,
+            'price' => $request->price,
+            'image_url' => $imagePath,
+        ]);
 
         return redirect()->route('admin.packages.index')->with('success', 'Paket berhasil dibuat.');
     }
+    public function update(Request $request, Package $package)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price_per_pax' => 'required|numeric',
+            'min_order' => 'required|integer|min:1',
+            'menu_items' => 'required|array', // Pastikan menu_items dikirim sebagai array
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Gambar bersifat opsional
+        ]);
+        // Handle image upload if new image is provided
+        if ($request->hasFile('image_url')) {
+            // Hapus gambar sebelumnya jika ada
+            if ($package->image_url && StorageDisk::disk('public')->exists($package->image_url)) {
+                StorageDisk::disk('public')->delete($package->image_url);
+            }
 
-    
+            // Simpan gambar baru
+            $imagePath = $request->file('image_url')->store('package_images', 'public');
+            $package->image_url = $imagePath;
+        }
+
+        // Update package with new data
+        $package->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'min_order' => $request->min_order,
+            'price_per_pax' => $request->price_per_pax,
+            'image_url' => $package->image_url, // Use the updated image path or keep existing
+        ]);
+
+        // Sync menu items to package
+        $package->menuItems()->sync($request->menu_items);
+
+        return redirect()->route('admin.packages.index')->with('success', 'Paket berhasil diperbarui.');
+    }
 }
