@@ -20,24 +20,24 @@
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-                <span class="info-box-icon text-bg-warning shadow-sm">
-                    <i class="fas fa-shopping-basket"></i>
-                </span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Pemesanan</span>
-                    <span class="info-box-number">{{ $countOrder }}</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
                 <span class="info-box-icon text-bg-danger shadow-sm">
                     <i class="bi bi-box-seam"></i>
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Paket</span>
                     <span class="info-box-number">{{ $countPackage }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon text-bg-warning shadow-sm">
+                    <i class="fas fa-shopping-basket"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Pemesanan</span>
+                    <span class="info-box-number">{{ $countOrder }}</span>
                 </div>
             </div>
         </div>

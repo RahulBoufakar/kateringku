@@ -34,24 +34,27 @@ class PackageController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'category' => 'required|string',
-            'price' => 'required|numeric',
+            'price_per_pax' => 'required|numeric',
+            'min_order' => 'required|integer|min:1',
+            'menu_items' => 'required|array',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Gambar bersifat opsional
         ]);
-
+        
         $imagePath = null;
         if ($request->hasFile('image')) {
             // Simpan gambar ke storage/app/public/package_images
             $imagePath = $request->file('image')->store('package_images', 'public');
         }
-
-        Package::create([
+        
+        $package = Package::create([
             'name' => $request->name,
             'description' => $request->description,
-            'category' => $request->category,
-            'price' => $request->price,
+            'price_per_pax' => $request->price_per_pax,
+            'min_order' => $request->min_order,
             'image_url' => $imagePath,
         ]);
+
+        $package->menuItems()->attach($request->menu_items);
 
         return redirect()->route('admin.packages.index')->with('success', 'Paket berhasil dibuat.');
     }
@@ -90,5 +93,16 @@ class PackageController extends Controller
         $package->menuItems()->sync($request->menu_items);
 
         return redirect()->route('admin.packages.index')->with('success', 'Paket berhasil diperbarui.');
+    }
+
+    public function destroy(Package $package)
+    {
+        // Hapus gambar sebelum hapus
+        if ($package->image_url && StorageDisk::disk('public')->exists($package->image_url)) {
+            StorageDisk::disk('public')->delete($package->image_url);
+        }
+        $package->delete();
+
+        return redirect()->route('admin.packages.index')->with('success', 'Paket berhasil dihapus.');
     }
 }

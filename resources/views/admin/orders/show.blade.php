@@ -60,8 +60,20 @@
                         <tbody>
                             @foreach($order->details as $detail)
                             <tr>
-                                <td>{{ $detail->package->name ?? 'Item Dihapus' }}</td>
-                                <td>{{ $detail->quantity }} orang</td>
+                                <td>
+                                    @if($detail->package_id)
+                                        {{ $detail->package->name ?? 'Item Dihapus' }}
+                                    @else
+                                        {{ $detail->menuItem->nama_menu ?? 'Menu Dihapus' }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($detail->package_id)
+                                        {{ $detail->quantity }} orang
+                                    @else
+                                        {{ $detail->quantity }} porsi
+                                    @endif
+                                </td>
                                 <td>Rp {{ number_format($detail->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($detail->quantity * $detail->price, 0, ',', '.') }}</td>
                             </tr>

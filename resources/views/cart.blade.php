@@ -3,8 +3,10 @@
 @section('title-page', 'Keranjang Belanja')
 
 @section('header')
-    <h1 class="display-5 fw-bold">Keranjang Belanja Anda</h1>
-    <p class="lead">Periksa kembali item pesanan Anda sebelum melanjutkan ke pembayaran.</p>
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="display-5 fw-bold mb-2">Keranjang Belanja Anda</h1>
+        <p class="lead text-center">Periksa kembali item pesanan Anda sebelum melanjutkan ke pembayaran.</p>
+    </div>
 @endsection
 
 @section('content')

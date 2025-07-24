@@ -18,6 +18,11 @@ Route::get('/', function(){
     return view('index');
 })->name('index');
 
+//display contac information
+Route::get('/kontak', function () {
+    return view('contact');
+})->name('contact');
+
 //display menu
 Route::get('/menu', [CustomerMenuController::class, 'index'])->name('menu');
 

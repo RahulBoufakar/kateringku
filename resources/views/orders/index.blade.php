@@ -3,8 +3,10 @@
 @section('title-page', 'Daftar Pesanan Saya')
 
 @section('header')
-    <h1 class="display-5 fw-bold">Daftar Pesanan Anda</h1>
-    <p class="lead">Lihat riwayat pesanan dan detail pesanan Anda di sini.</p>
+    <div class="d-flex align-items-center flex-column">
+        <h1 class="display-5 fw-bold me-3">Daftar Pesanan Anda</h1>
+        <p class="lead">Lihat riwayat pesanan dan detail pesanan Anda di sini.</p>
+    </div>
 @endsection
 
 @section('content')

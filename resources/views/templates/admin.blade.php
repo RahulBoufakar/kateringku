@@ -11,6 +11,7 @@
     {{-- PASTIKAN PATH INI BENAR SESUAI PROYEK ANDA --}}
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}" /> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
@@ -47,7 +48,7 @@
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
             <div class="sidebar-brand">
                 <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                    <img src="{{ asset('logo.png') }}" alt="KateringKu Logo" class="brand-image opacity-75 shadow" />
+                    <img src="{{ asset('logo.jpeg') }}" alt="KateringKu Logo" class="brand-image opacity-75 shadow" />
                     <span class="brand-text fw-light">KateringKu</span>
                 </a>
             </div>
@@ -63,7 +64,7 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.menus.index') }}" class="nav-link {{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Manajemen Menu</p>
+                                <p>Item Menu</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -3,8 +3,12 @@
 @section('title-page', 'Detail Pesanan #' . $order->id)
 
 @section('header')
-    <h1 class="display-5 fw-bold">Detail Pesanan Anda</h1>
-    <p class="lead">Lacak status pesanan Anda dan lakukan pembayaran di sini.</p>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div>
+            <h1 class="display-5 fw-bold">Detail Pesanan Anda</h1>
+            <p class="lead">Lacak status pesanan Anda dan lakukan pembayaran di sini.</p>
+        </div>
+    </div>
 @endsection
 
 @section('content')
@@ -49,10 +53,25 @@
                     @endforeach
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th colspan="3" class="text-end">Total Harga:</th>
-                        <th>Rp {{ number_format($order->total_price, 0, ',', '.') }}</th>
-                    </tr>
+                    @if (Auth::user()->orders->first()->id == $order->id)
+                        <tr>
+                            <th colspan="3" class="text-end">Total Harga Awal:</th>
+                            <th>Rp {{ number_format($order->total_price/0.85, 0, ',', '.') }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" class="text-end">Diskon:</th>
+                            <th>15%</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" class="text-end">Total Harga Akhir:</th>
+                            <th>Rp {{ number_format($order->total_price , 0, ',', '.') }}</th>
+                        </tr>
+                    @else
+                        <tr>
+                            <th colspan="3" class="text-end">Total Harga:</th>
+                            <th>Rp {{ number_format($order->total_price, 0, ',', '.') }}</th>
+                        </tr>
+                    @endif
                 </tfoot>
             </table>
 

@@ -105,6 +105,11 @@ class OrderController extends Controller
 
         $totalPrice = $package->price_per_pax * $request->num_of_pax;
 
+        // Khusus untuk a la carte, jika ini adalah order pertama maka diberikan diskon 15%
+        if (Auth::user()->orders->count() == 0) {
+            $totalPrice *= 0.85; // 15% discount
+        }
+        
         // Buat Order Utama
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -148,7 +153,11 @@ class OrderController extends Controller
         foreach ($cart as $details) {
             $totalPrice += $details['price'] * $details['quantity'];
         }
-
+        dd($totalPrice, Auth::user()->orders->count());
+        // Khusus untuk a la carte, jika ini adalah order pertama maka diberikan diskon 15%
+        if (Auth::user()->orders->count() == 0) {
+            $totalPrice *= 0.85; // 15% discount
+        }
         // Buat Order Utama
         $order = Order::create([
             'user_id' => Auth::id(),

@@ -19,7 +19,7 @@
                     <button class="nav-link active" id="pills-packages-tab" data-bs-toggle="pill" data-bs-target="#pills-packages" type="button" role="tab" aria-controls="pills-packages" aria-selected="true">Paket Katering</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-ala-carte-tab" data-bs-toggle="pill" data-bs-target="#pills-ala-carte" type="button" role="tab" aria-controls="pills-ala-carte" aria-selected="false">Menu Satuan (A La Carte)</button>
+                    <button class="nav-link" id="pills-ala-carte-tab" data-bs-toggle="pill" data-bs-target="#pills-ala-carte" type="button" role="tab" aria-controls="pills-ala-carte" aria-selected="false">Item Menu</button>
                 </li>
             </ul>
 
@@ -98,7 +98,7 @@
                 </div>
                 {{-- Konten Tab A La Carte --}}
                 <div class="tab-pane fade" id="pills-ala-carte" role="tabpanel" aria-labelledby="pills-ala-carte-tab">
-                    <h2 class="text-center mb-4">Pilih Menu Satuan</h2>
+                    <h2 class="text-center mb-4">Pilih Item Menu</h2>
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}

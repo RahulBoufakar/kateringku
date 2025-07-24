@@ -1,6 +1,6 @@
 @extends('templates.admin')
 
-@section('title-page', 'Menu')
+@section('title', 'Item Menu')
 
 @section('content')
 <div class="container">
@@ -9,9 +9,9 @@
         <a href="{{ route('admin.menus.create') }}" class="btn btn-primary">Tambah Menu</a>
     </div>
 
-    <p class="mb-2">Welcome to the admin menu management page!</p>
-    <p class="mb-4">Here you can manage your application menus, add new items, and organize them as needed.</p>
-
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <div class="table-responsive">
         <table class="table table-bordered align-middle">
             <thead class="table-light">
